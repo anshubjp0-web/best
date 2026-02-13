@@ -1,1 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine</title>
 
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(180deg, #ff5f8f, #ffc1cc);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: cursive;
+  overflow: hidden;
+}
+
+.container {
+  width: 95vw;
+  max-width: 400px;
+  height: 95vh;
+  max-height: 700px;
+  background: white;
+  border-radius: 20px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+/* Text */
+h2 {
+  margin-top: 60px;
+  color: #ff007f;
+  animation: blink 2s infinite alternate;
+}
+
+@keyframes blink {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* Buttons */
+.buttons {
+  margin-top: 60px;
+}
+
+button {
+  padding: 10px 25px;
+  margin: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#yes {
+  background: #ff4081;
+  color: white;
+}
+
+#no {
+  background: gray;
+  color: white;
+  position: absolute;
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  width: 15px;
+  height: 15px;
+  background: red;
+  transform: rotate(45deg);
+  animation: float 5s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: red;
+  border-radius: 50%;
+}
+
+.heart::before { top: -8px; left: 0; }
+.heart::after { left: -8px; top: 0; }
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+}
+
+/* Love message */
+.message {
+  display: none;
+  margin-top: 80px;
+  color: #ff0055;
+  font-size: 20px;
+  animation: pop 1s infinite alternate;
+}
+
+@keyframes pop {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="container">
+  <h2 id="question">Vaishnavi 
+    Will you be my Valentine? ❤️</h2>
+
+  <div class="buttons">
+    <button id="yes">Yes 💖</button>
+    <button id="no">No 😅</button>
+  </div>
+
+  <div class="message" id="msg">
+    Yay! I Love You Forever my dear i wish
+    not only in this life but also in their next life
+    my dear love vaishu uff bebo. ❤️😍
+  </div>
+</div>
+
+<script>
+const container = document.getElementById("container");
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const msg = document.getElementById("msg");
+const question = document.getElementById("question");
+
+// Move NO button on click (mobile friendly)
+noBtn.addEventListener("click", () => {
+  const rect = container.getBoundingClientRect();
+  const x = Math.random() * (rect.width - 80);
+  const y = Math.random() * (rect.height - 50);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+// YES button
+yesBtn.addEventListener("click", () => {
+  question.style.display = "none";
+  document.querySelector(".buttons").style.display = "none";
+  msg.style.display = "block";
+});
+
+// Create hearts
+for (let i = 0; i < 30; i++) {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.style.left = Math.random() * 100 + "%";
+  heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+  container.appendChild(heart);
+}
+</script>
+
+</body>
+  </html>
